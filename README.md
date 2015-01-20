@@ -5,5 +5,8 @@ The application hooks to call status and disables the CheckinService when call i
 
 Not tested on anything besides Nexus 4 with cm-11-20141115-SNAPSHOT-M12-mako.
 
+## Installation
+[Download](https://github.com/groupsky/nexus4-call-fixer/releases) the latest release and install on your Nexus 4.
 
+Run the app and click the enable button. Then try to call. If this doesn't work, try to reboot the device.
 
