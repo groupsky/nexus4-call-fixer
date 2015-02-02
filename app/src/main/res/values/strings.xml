@@ -2,5 +2,11 @@
 <resources>
 
     <string name="app_name">Nexus 4 Call Fixer</string>
+    <string name="status_label_sync_service">SyncService:</string>
+    <string name="status_label_broadcast_receiver">Fix:</string>
+    <string name="status_enabled">enabled</string>
+    <string name="status_disabled">disabled</string>
+    <string name="enable">Enable fix</string>
+    <string name="disable">Disable fix</string>
 
 </resources>

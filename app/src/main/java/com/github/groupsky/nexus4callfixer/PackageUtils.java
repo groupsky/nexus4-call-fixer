@@ -17,13 +17,13 @@ public class PackageUtils {
     private static final String TAG = "SSD";
 
     public static void enableService() {
-        modifyService("unblock");
+//        modifyService("unblock");
         modifyService("enable");
     }
 
     public static void disableService() {
         modifyService("disable");
-        modifyService("block");
+//        modifyService("block");
     }
 
     private static boolean modifyService(String operation) {

@@ -1,24 +1,30 @@
 package com.github.groupsky.nexus4callfixer;
 
+import android.app.Activity;
 import android.content.ComponentName;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.stericson.RootShell.RootShell;
 
 import static android.content.pm.PackageManager.*;
 import static android.view.View.*;
+import static com.github.groupsky.nexus4callfixer.R.id;
+import static com.github.groupsky.nexus4callfixer.R.string.*;
 
-public class MainActivity extends ActionBarActivity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener {
 
     private static final String TAG = "SSD";
     Button btnEnable;
     Button btnDisable;
     ComponentName br;
+    ComponentName ss;
+    TextView lblStatusSyncService;
+    TextView lblStatusBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +35,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         btnEnable.setOnClickListener(this);
         btnDisable = (Button)findViewById(android.R.id.button2);
         btnDisable.setOnClickListener(this);
+        lblStatusSyncService = (TextView)findViewById(id.status_sync_service);
+        lblStatusBroadcastReceiver = (TextView)findViewById(id.status_broadcast_receiver);
 
         br = new ComponentName(this, CallReceiver.class);
+        ss = new ComponentName("com.google.android.gms", "com.google.android.gms.checkin.CheckinService");
     }
 
     @Override
@@ -40,12 +49,26 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         updateState();
     }
 
+    private boolean displayState(ComponentName component, TextView view, boolean defaultEnabled) {
+        int state = getPackageManager().getComponentEnabledSetting(component);
+        Log.d(TAG, component+" state "+state);
+        boolean enabled = state == COMPONENT_ENABLED_STATE_ENABLED || defaultEnabled && state == COMPONENT_ENABLED_STATE_DEFAULT;
+        view.setText(enabled?status_enabled:status_disabled);
+        return enabled;
+    }
+
     private void updateState() {
-        int state = getPackageManager().getComponentEnabledSetting(br);
-        boolean enabled = state == COMPONENT_ENABLED_STATE_ENABLED;
-        Log.d(TAG, String.format("broadcast receiver state %d: %b", state, enabled));
-        btnEnable.setVisibility(enabled?GONE:VISIBLE);
-        btnDisable.setVisibility(enabled?VISIBLE:GONE);
+        Log.d(TAG, "display broadcast receiver status");
+        if (displayState(br, lblStatusBroadcastReceiver, false)) {
+            btnEnable.setVisibility(GONE);
+            btnDisable.setVisibility(VISIBLE);
+        } else {
+            btnEnable.setVisibility(VISIBLE);
+            btnDisable.setVisibility(GONE);
+        }
+        Log.d(TAG, "display sync service status");
+        displayState(ss, lblStatusSyncService, true);
+        Log.d(TAG, "done");
     }
 
     @Override

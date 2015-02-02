@@ -12,14 +12,51 @@
         android:id="@android:id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enable"
-        android:visibility="gone" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/enable" />
 
     <Button
         android:id="@android:id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Disable"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/disable"
         android:visibility="gone" />
+
+    <!-- sync service status -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/status_label_sync_service"
+        android:textAppearance="@android:style/TextAppearance.Holo.Large" />
+
+    <TextView
+        android:id="@+id/status_sync_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textAppearance="@android:style/TextAppearance.Holo.Large" />
+
+    <!-- broadcast receiver status -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/status_sync_service"
+        android:layout_alignParentLeft="true"
+        android:text="@string/status_label_broadcast_receiver"
+        android:textAppearance="@android:style/TextAppearance.Holo.Large" />
+
+    <TextView
+        android:id="@+id/status_broadcast_receiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/status_sync_service"
+        android:layout_alignParentRight="true"
+        android:textAppearance="@android:style/TextAppearance.Holo.Large" />
 
 </RelativeLayout>
